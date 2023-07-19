@@ -1,3 +1,4 @@
+# Will create an application load balancer named "front-end-lb"
 resource "aws_lb" "front_end" {
   name               = "front-end-lb"
   internal           = false
@@ -30,6 +31,7 @@ resource "aws_lb_target_group" "front_end" {
   vpc_id   = aws_vpc.main.id
 }
 
+#target group attachment, that attaches the instance we will create to the load balancer target group
 resource "aws_lb_target_group_attachment" "front_end" {
   count            = length(aws_subnet.public_subnets)
   target_group_arn = aws_lb_target_group.front_end.arn
